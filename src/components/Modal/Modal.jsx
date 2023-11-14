@@ -9,7 +9,7 @@ import {
 } from "@material-tailwind/react";
 
 const Modal = ({ isVisible }) => {
-  const { setmodalVisible } = useContext(MainContext);
+  const { setmodalVisible, allData } = useContext(MainContext);
 
   const [open, setOpen] = React.useState(0);
 
@@ -41,96 +41,42 @@ const Modal = ({ isVisible }) => {
           <div className="Title text-3xl font-bold mb-3">Select Subject</div>
           <div className="pr-4 h-[83%] overflow-auto">
             <div className="list pl-1">
-              <Accordion open={open === 1}>
-                <AccordionHeader
-                  onClick={() => handleOpen(1)}
-                  className="border-b border-none"
-                >
-                  <div className="body flex w-[100%] justify-between items-center">
-                    <div className="flex space-x-4">
-                      <div className="chp">What is Material Tailwind?</div>
-                    </div>
-                    <img
-                      className="h-[20px]"
-                      src="img/arrow.png"
-                      alt="Google Logo"
-                    />
-                  </div>
-                </AccordionHeader>
-                <AccordionBody className=" py-[0px]">
-                  <div className="list">
-                    <div className="item px-5 bg-blue-50 h-12 flex items-center text-lg font-bold text-black hover:bg-blue-500 hover:text-white cursor-pointer rounded-[10px] m-2">
-                      lorem
-                    </div>
-                    <div className="item px-5 bg-blue-50 h-12 flex items-center text-lg font-bold text-black hover:bg-blue-500 hover:text-white cursor-pointer rounded-[10px] m-2">
-                      lorem
-                    </div>
-                    <div className="item px-5 bg-blue-50 h-12 flex items-center text-lg font-bold text-black hover:bg-blue-500 hover:text-white cursor-pointer rounded-[10px] m-2">
-                      lorem
-                    </div>
-                  </div>
-                </AccordionBody>
-              </Accordion>
-              <Accordion open={open === 2}>
-                <AccordionHeader
-                  onClick={() => handleOpen(2)}
-                  className="border-b border-none"
-                >
-                  <div className="body flex w-[100%] justify-between items-center">
-                    <div className="flex space-x-4">
-                      <div className="chp">What is Material Tailwind?</div>
-                    </div>
-                    <img
-                      className="h-[20px]"
-                      src="img/arrow.png"
-                      alt="Google Logo"
-                    />
-                  </div>
-                </AccordionHeader>
-                <AccordionBody className=" py-[0px]">
-                  <div className="list">
-                    <div className="item px-5 bg-blue-50 h-12 flex items-center text-lg font-bold text-black hover:bg-blue-500 hover:text-white cursor-pointer rounded-[10px] m-2">
-                      lorem
-                    </div>
-                    <div className="item px-5 bg-blue-50 h-12 flex items-center text-lg font-bold text-black hover:bg-blue-500 hover:text-white cursor-pointer rounded-[10px] m-2">
-                      lorem
-                    </div>
-                    <div className="item px-5 bg-blue-50 h-12 flex items-center text-lg font-bold text-black hover:bg-blue-500 hover:text-white cursor-pointer rounded-[10px] m-2">
-                      lorem
-                    </div>
-                  </div>
-                </AccordionBody>
-              </Accordion>
-              <Accordion open={open === 3}>
-                <AccordionHeader
-                  onClick={() => handleOpen(3)}
-                  className="border-b border-none"
-                >
-                  <div className="body flex w-[100%] justify-between items-center">
-                    <div className="flex space-x-4">
-                      <div className="chp">What is Material Tailwind?</div>
-                    </div>
-                    <img
-                      className="h-[20px]"
-                      src="img/arrow.png"
-                      alt="Google Logo"
-                    />
-                  </div>
-                </AccordionHeader>
-                <AccordionBody className=" py-[0px]">
-                  <div className="list">
-                    <div className="item px-5 bg-blue-50 h-12 flex items-center text-lg font-bold text-black hover:bg-blue-500 hover:text-white cursor-pointer rounded-[10px] m-2">
-                      lorem
-                    </div>
-                    <div className="item px-5 bg-blue-50 h-12 flex items-center text-lg font-bold text-black hover:bg-blue-500 hover:text-white cursor-pointer rounded-[10px] m-2">
-                      lorem
-                    </div>
-                    <div className="item px-5 bg-blue-50 h-12 flex items-center text-lg font-bold text-black hover:bg-blue-500 hover:text-white cursor-pointer rounded-[10px] m-2">
-                      lorem
-                    </div>
-                  </div>
-                </AccordionBody>
-              </Accordion>
+              {allData.map((item, num) => {
+                return (
+                  <>
+                    <Accordion open={open === num + 1}>
+                      <AccordionHeader
+                        onClick={() => handleOpen(num + 1)}
+                        className="border-b border-none"
+                      >
+                        <div className="body flex w-[100%] justify-between items-center">
+                          <div className="flex space-x-4">
+                            <div className="chp">{item.className}</div>
+                          </div>
+                          <img
+                            className="h-[20px]"
+                            src="img/arrow.png"
+                            alt="Google Logo"
+                          />
+                        </div>
+                      </AccordionHeader>
+                      <AccordionBody className=" py-[0px]">
+                        <div className="list">
+                          {item.subjects.map((sub) => {
+                            return (
+                              <>
+                                <div className="item px-5 bg-blue-50 h-12 flex items-center text-lg font-bold text-black hover:bg-blue-500 hover:text-white cursor-pointer rounded-[10px] m-2">
+                                  {sub.subjectName}
+                                </div>
+                              </>
+                            );
+                          })}
+                        </div>
+                      </AccordionBody>
+                    </Accordion>
+                  </>
+                );
+              })}
             </div>
           </div>
         </div>
