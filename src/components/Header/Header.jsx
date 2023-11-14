@@ -3,7 +3,13 @@ import { useContext } from "react";
 import { MainContext } from "../../context/Main_context";
 
 const Header = () => {
+
   const { setmodalVisible } = useContext(MainContext);
+  const {
+    navData,
+    className,
+  } = useContext(MainContext);
+
   return (
     <>
       <div className="Main border-b-[2px] border-opacity-40 border-[#4a4e69] h-[10vh] flex items-center bg-[#f5f5f5]">
@@ -14,7 +20,9 @@ const Header = () => {
           className="dropdown  h-[70%] w-[250px] ml-5 rounded-[10px] border-[2px] border-blue-500 cursor-pointer flex items-center justify-between px-4"
           onClick={() => setmodalVisible(true)}
         >
-          <div className="text-xl text-blue-500 font-bold">Select Subject</div>
+          <div className="text-xl text-blue-500 font-bold">{
+            className ? className : "Select Subject"
+          }</div>
           <img
             className="h-[50%] fill-blue-500"
             src="img/arrow.png"

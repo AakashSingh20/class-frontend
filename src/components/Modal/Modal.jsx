@@ -9,7 +9,11 @@ import {
 } from "@material-tailwind/react";
 
 const Modal = ({ isVisible }) => {
-  const { setmodalVisible, allData } = useContext(MainContext);
+  const { 
+      setmodalVisible, 
+      allData,
+      getNavData
+    } = useContext(MainContext);
 
   const [open, setOpen] = React.useState(0);
 
@@ -65,7 +69,7 @@ const Modal = ({ isVisible }) => {
                           {item.subjects.map((sub) => {
                             return (
                               <>
-                                <div className="item px-5 bg-blue-50 h-12 flex items-center text-lg font-bold text-black hover:bg-blue-500 hover:text-white cursor-pointer rounded-[10px] m-2">
+                                <div onClick={() => getNavData(item._id,sub._id,item.className)} className="item px-5 bg-blue-50 h-12 flex items-center text-lg font-bold text-black hover:bg-blue-500 hover:text-white cursor-pointer rounded-[10px] m-2">
                                   {sub.subjectName}
                                 </div>
                               </>
